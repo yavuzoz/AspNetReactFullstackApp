@@ -49,7 +49,7 @@ In your `frontend/.env` file, define the backend API base like this:
 # Production (Docker)
 VITE_API_BASE_URL=http://localhost:5000/api
 
-# ⚠️ Comment this out if not using localhost dev:
+# localhost dev:
 # VITE_API_BASE_URL=http://backend:8080/api
 ```
 
