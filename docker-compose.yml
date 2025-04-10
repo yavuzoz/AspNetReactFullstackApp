@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ProductDb
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - appnet
+
+  backend:
+    image: yavuzozbay/backend-app
+    container_name: backend
+    ports:
+      - "5000:8080"
+    depends_on:
+      - mysql
+    networks:
+      - appnet
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  frontend:
+    image: yavuzozbay/frontend-app
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - appnet
+
+volumes:
+  mysql_data:
+
+networks:
+  appnet:
